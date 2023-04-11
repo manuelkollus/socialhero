@@ -1,0 +1,47 @@
+plugins {
+  id 'org.springframework.boot' version '3.0.1'
+  id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+  id 'java'
+}
+
+group 'app.safecreator'
+version '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+  maven {
+    url 'https://repo.spring.io/milestone'
+  }
+  maven {
+    url 'https://repo.spring.io/snapshot'
+  }
+}
+
+dependencies {
+  // Spring Boot dependencies
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+
+  // HTTP client
+  implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+
+  // Google Guava library
+  implementation 'com.google.guava:guava:31.1-jre'
+
+  // OkHttp library
+  implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
+
+  // Selenium WebDriver and dependencies
+  implementation('org.seleniumhq.selenium:selenium-java:4.8.1') {
+    exclude group: 'org.seleniumhq.selenium', module: 'selenium-devtools-v85'
+    exclude group: 'org.seleniumhq.selenium', module: 'selenium-devtools-v108'
+    exclude group: 'org.seleniumhq.selenium', module: 'selenium-devtools-v109'
+  }
+
+
+  // WebDriverManager library for Selenium WebDriver setup
+  implementation 'io.github.bonigarcia:webdrivermanager:5.3.2'
+
+  // Lombok library for reducing boilerplate code
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+}

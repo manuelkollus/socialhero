@@ -1,0 +1,63 @@
+plugins {
+  id 'org.springframework.boot' version '3.0.1'
+  id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+  id 'java'
+}
+
+group 'app.socialhero'
+version '1.0.0'
+
+repositories {
+  mavenCentral()
+  maven { url 'https://repo.spring.io/milestone' }
+  maven { url 'https://repo.spring.io/snapshot' }
+}
+
+configurations {
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+
+dependencies {
+  // Spring Boot Starter
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation("org.springframework.boot:spring-boot-starter-cache")
+
+  // Google APIs
+  implementation 'com.google.apis:google-api-services-youtube:v3-rev222-1.25.0'
+
+  // Caching Libraries
+  implementation 'com.github.ben-manes.caffeine:caffeine:3.1.1'
+  implementation 'com.google.guava:guava:31.1-jre'
+
+  // Validation Libraries
+  implementation 'commons-validator:commons-validator:1.7'
+
+  // Parsing Library
+  implementation 'org.jsoup:jsoup:1.15.4'
+
+  // Exception Handling Library
+  implementation 'org.slieb:throwable-interfaces:1.13'
+
+  // JSON Parsing Library
+  implementation 'com.google.code.gson:gson:2.10.1'
+
+  // HTTP Library
+  implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11'
+
+  // i18n Library
+  implementation 'com.neovisionaries:nv-i18n:1.11'
+
+  // Database Drivers
+  implementation 'org.mariadb.jdbc:mariadb-java-client:2.6.1'
+  runtimeOnly 'org.postgresql:postgresql'
+
+  // Security Libraries
+  implementation 'org.springframework.security:spring-security-web'
+
+  // Lombok Library for Simplified Code
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+}

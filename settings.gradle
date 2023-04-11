@@ -1,2 +1,15 @@
+pluginManagement {
+  repositories {
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+    gradlePluginPortal()
+  }
+}
+
 rootProject.name = 'socialhero'
+
+include 'apiserver'
+include 'scraper-tiktok'
+include 'scraper-common'
+include 'scraper-job'
 
