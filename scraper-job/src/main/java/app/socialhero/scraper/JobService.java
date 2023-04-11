@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,6 @@ public class JobService {
     }
   }
 
-
   private static final int MAX_CONCURRENT_EVENTS = 15;
 
   private int computeNumberEventsToExecute() {
@@ -51,5 +51,11 @@ public class JobService {
 
     JobCreatedEvent event = JobCreatedEvent.of(this, job);
     eventPublisher.publishEvent(event);
+  }
+
+  @EventListener(classes = JobFinishEvent.class)
+  public void finishEvent(JobFinishEvent finishEvent) {
+    log.info("Finished job, jobId={}, status={}", finishEvent.getJobId(), finishEvent.getStatus());
+    numRunningEvents.decrementAndGet();
   }
 }
